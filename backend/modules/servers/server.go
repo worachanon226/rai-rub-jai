@@ -14,7 +14,7 @@ type Server struct {
 	Cfg *config.Config
 }
 
-func NeweServer(cfg *config.Config) *Server {
+func NewServer(cfg *config.Config) *Server {
 	app := fiber.New()
 	app.Use(cors.New())
 
