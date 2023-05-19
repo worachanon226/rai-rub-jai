@@ -12,7 +12,8 @@ import (
 )
 
 func NewMongoDBConnection(cfg *config.Config) (*mongo.Client, error) {
-	MongoURL, err := utils.ConnectionBuilder("mongo", cfg)
+	MongoURL, err := utils.ConnectionBuilder("mongodb", cfg)
+	fmt.Println(MongoURL)
 	if err != nil {
 		panic(err)
 	}
