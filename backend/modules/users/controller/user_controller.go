@@ -10,7 +10,7 @@ import (
 
 func NewUsersController(r fiber.Router) {
 	r.Post("/user/register", register)
-	r.Post("user/login", login)
+	r.Post("/user/login", login)
 }
 
 func register(c *fiber.Ctx) error {
