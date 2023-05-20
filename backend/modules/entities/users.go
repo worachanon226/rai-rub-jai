@@ -18,5 +18,4 @@ type UserCollection struct {
 	User     string `json:"username" bson:"username"`
 	Email    string `json:"email" bson:"email"`
 	HashPass string `json:"hashpass" bson:"hashpass"`
-	KeyPass  string `json:"keypass" bson:"keypass"`
 }
