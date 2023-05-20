@@ -28,8 +28,7 @@ func main() {
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
-	_ = db
 
-	s := servers.NewServer(cfg)
+	s := servers.NewServer(cfg, db)
 	s.Start()
 }
