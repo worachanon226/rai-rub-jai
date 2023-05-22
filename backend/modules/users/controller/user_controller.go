@@ -15,6 +15,7 @@ func NewUsersController(r fiber.Router) {
 
 func register(c *fiber.Ctx) error {
 	req := new(entities.UserRegisterReq)
+
 	if err := c.BodyParser(req); err != nil {
 		return c.Status(fiber.ErrBadRequest.Code).JSON(fiber.Map{
 			"status":      fiber.ErrBadRequest.Message,
@@ -26,7 +27,7 @@ func register(c *fiber.Ctx) error {
 
 	user, err := service.UserRegister(req)
 	if err != nil {
-		panic(err.Error())
+		return fiber.NewError(fiber.StatusOK, err.Error())
 	}
 
 	res, err := json.Marshal(user)

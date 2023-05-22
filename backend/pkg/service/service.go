@@ -24,6 +24,11 @@ func NewService(db *mongo.Client) {
 }
 
 func UserRegister(req *entities.UserRegisterReq) (*entities.UserRegisterRes, error) {
+
+	if !isUser(req.User) {
+		return nil, errors.New("this username is already used or something went wrong")
+	}
+
 	hashed, err := bcrypt.GenerateFromPassword([]byte(req.Pass), 10)
 	if err != nil {
 		return nil, err
@@ -32,7 +37,6 @@ func UserRegister(req *entities.UserRegisterReq) (*entities.UserRegisterRes, err
 	user := entities.UserCollection{
 		UserID:   uuid.New().String(),
 		User:     req.User,
-		Email:    req.Email,
 		HashPass: string(hashed),
 	}
 
@@ -45,7 +49,6 @@ func UserRegister(req *entities.UserRegisterReq) (*entities.UserRegisterRes, err
 	res := &entities.UserRegisterRes{
 		UserID: user.UserID,
 		User:   user.User,
-		Email:  user.Email,
 	}
 
 	return res, nil
@@ -72,8 +75,12 @@ func UserLogin(req *entities.UserLoginReq) (*entities.UserRegisterRes, error) {
 	res := &entities.UserRegisterRes{
 		UserID: userData.UserID,
 		User:   userData.User,
-		Email:  userData.Email,
 	}
 
 	return res, nil
+}
+
+func isUser(user string) bool {
+	err := coll.UserCollection.FindOne(context.TODO(), bson.D{{Key: "username", Value: user}}).Decode("")
+	return err == nil
 }
