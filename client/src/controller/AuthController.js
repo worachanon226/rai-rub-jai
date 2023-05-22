@@ -4,11 +4,14 @@ let { endpoint, path } = API;
 
 let submitRegister = async (data, callback) => {
     try {
-        let res = await axios.post(endpoint.concat(path.register), {
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data),
-        })
-        return res.status
+        let res = await axios.post(endpoint.concat(path.register),
+            JSON.stringify(data),
+            {
+                headers: { "Content-Type": "application/json" }
+            }
+        );
+
+        return res.status;
     }
     catch (error) {
         return error;
@@ -34,4 +37,33 @@ let confirmPassword = () => {
     }
 }
 
-export { submitRegister, confirmPassword }
+let checkDupUser = async () => {
+    var u = document.getElementById("user").value
+    var utxt = document.getElementById("utxt")
+    var p = document.getElementById("user")
+    var bt = document.getElementById("submit")
+
+    try {
+        let res = await axios.post(endpoint.concat(path.checkDupUser),
+            u,
+            {
+                headers: { "Content-Type": "text/plain" },
+            }
+        );
+
+        if (res.data == true) {
+            bt.disabled = true;
+            utxt.style.visibility = "visible"
+            p.style.border = "1px solid red"
+        } else if (res.data == false) {
+            bt.disabled = false;
+            utxt.style.visibility = "hidden"
+            p.style.border = ""
+        }
+    }
+    catch (error) {
+        return error;
+    }
+}
+
+export { submitRegister, confirmPassword, checkDupUser }

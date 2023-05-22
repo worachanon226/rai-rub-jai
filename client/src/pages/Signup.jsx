@@ -1,4 +1,8 @@
-import { submitRegister, confirmPassword } from "../controller/AuthController";
+import {
+  submitRegister,
+  confirmPassword,
+  checkDupUser,
+} from "../controller/AuthController";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -26,6 +30,8 @@ const Signup = () => {
                 e.preventDefault();
                 let [user, pass, cpass] = e.target;
 
+                await checkDupUser(user.value);
+
                 let ok = await submitRegister(
                   {
                     username: user.value,
@@ -38,13 +44,24 @@ const Signup = () => {
               }}
             >
               <div>
-                <label
-                  htmlFor="username"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Username
-                </label>
+                <div className="block mb-2 text-sm font-medium">
+                  <label
+                    htmlFor="username"
+                    className="text-gray-900 dark:text-white"
+                  >
+                    Username
+                  </label>
+                  <label
+                    id="utxt"
+                    className="ml-2 text-gray-900 dark:text-red-500"
+                    style={{ visibility: "hidden" }}
+                  >
+                    * This username is already used
+                  </label>
+                </div>
+
                 <input
+                  onKeyUp={checkDupUser}
                   type="username"
                   name="username"
                   id="user"

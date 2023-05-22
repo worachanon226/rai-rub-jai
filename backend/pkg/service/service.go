@@ -24,11 +24,6 @@ func NewService(db *mongo.Client) {
 }
 
 func UserRegister(req *entities.UserRegisterReq) (*entities.UserRegisterRes, error) {
-
-	if !isUser(req.User) {
-		return nil, errors.New("this username is already used or something went wrong")
-	}
-
 	hashed, err := bcrypt.GenerateFromPassword([]byte(req.Pass), 10)
 	if err != nil {
 		return nil, err
@@ -80,7 +75,8 @@ func UserLogin(req *entities.UserLoginReq) (*entities.UserRegisterRes, error) {
 	return res, nil
 }
 
-func isUser(user string) bool {
-	err := coll.UserCollection.FindOne(context.TODO(), bson.D{{Key: "username", Value: user}}).Decode("")
+func IsUser(user string) bool {
+	var u entities.UserCollection
+	err := coll.UserCollection.FindOne(context.TODO(), bson.D{{Key: "username", Value: user}}).Decode(&u)
 	return err == nil
 }

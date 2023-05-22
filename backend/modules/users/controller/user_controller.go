@@ -2,19 +2,29 @@ package controller
 
 import (
 	"encoding/json"
+	"fmt"
 	"rai-rub-jai/backend/modules/entities"
 	"rai-rub-jai/backend/pkg/service"
+	"strconv"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 func NewUsersController(r fiber.Router) {
+	r.Post("/user/checkDupUser", checkDupUser)
 	r.Post("/user/register", register)
 	r.Post("/user/login", login)
 }
 
+func checkDupUser(c *fiber.Ctx) error {
+	fmt.Println(string(c.Body()))
+	ch := service.IsUser(string(c.Body()))
+	return c.SendString(strconv.FormatBool(ch))
+}
+
 func register(c *fiber.Ctx) error {
 	req := new(entities.UserRegisterReq)
+	fmt.Println(req)
 
 	if err := c.BodyParser(req); err != nil {
 		return c.Status(fiber.ErrBadRequest.Code).JSON(fiber.Map{
