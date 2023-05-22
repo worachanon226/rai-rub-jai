@@ -32,7 +32,7 @@ func register(c *fiber.Ctx) error {
 
 	res, err := json.Marshal(user)
 	if err != nil {
-		panic(err.Error())
+		return err
 	}
 
 	return c.SendString(string(res))
@@ -56,7 +56,7 @@ func login(c *fiber.Ctx) error {
 
 	res, err := json.Marshal(user)
 	if err != nil {
-		panic(err.Error())
+		return err
 	}
 
 	return c.SendString(string(res))
