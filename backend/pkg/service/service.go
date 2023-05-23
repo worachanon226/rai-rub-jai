@@ -59,7 +59,6 @@ func UserLogin(req *entities.UserLoginReq) (*entities.UserRegisterRes, error) {
 		if err == mongo.ErrNoDocuments {
 			return nil, errors.New("this username isn't registered")
 		}
-		panic(err.Error())
 	}
 
 	ch := bcrypt.CompareHashAndPassword([]byte(userData.HashPass), []byte(req.Pass))

@@ -11,12 +11,28 @@ let submitRegister = async (data, callback) => {
             }
         );
 
-        return res.status;
+        return res.data;
     }
     catch (error) {
         return error;
     }
 };
+
+let submitLogin = async (data, callback) => {
+    try {
+        let res = await axios.post(endpoint.concat(path.login),
+            JSON.stringify(data),
+            {
+                headers: { "Content-Type": "application/json" }
+            }
+        );
+        return res
+
+    }
+    catch (error) {
+        return error;
+    }
+}
 
 let confirmPassword = () => {
     var p = document.getElementById("pass")
@@ -51,11 +67,11 @@ let checkDupUser = async () => {
             }
         );
 
-        if (res.data == true) {
+        if (res.data === true) {
             bt.disabled = true;
             utxt.style.visibility = "visible"
             p.style.border = "1px solid red"
-        } else if (res.data == false) {
+        } else if (res.data === false) {
             bt.disabled = false;
             utxt.style.visibility = "hidden"
             p.style.border = ""
@@ -66,4 +82,4 @@ let checkDupUser = async () => {
     }
 }
 
-export { submitRegister, confirmPassword, checkDupUser }
+export { submitRegister, submitLogin, confirmPassword, checkDupUser }
