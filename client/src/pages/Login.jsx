@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import { AuthContext } from "../AuthContext";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 const Login = () => {
   const navigate = useNavigate();

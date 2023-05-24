@@ -1,16 +1,17 @@
 import { AuthContext } from "../../AuthContext";
-import { UserContext } from "../../UserContext";
 import { Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../UserContext";
 import { useContext } from "react";
 import "../style/Nav.css";
 
 const Nav = () => {
   const { isLoggedIn, logout } = useContext(AuthContext);
   const { setUser } = useContext(UserContext);
+
   const handleLogout = () => {
-    setUser(null);
     logout();
+    setUser(null);
   };
 
   return (
