@@ -1,15 +1,18 @@
-import { Link } from "react-router-dom";
 import { submitLogin } from "../controller/AuthController";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../controller/AuthContext";
+import { UserContext } from "../UserContext";
+import { AuthContext } from "../AuthContext";
+import { Link } from "react-router-dom";
 import { useContext } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
   const { login } = useContext(AuthContext);
 
-  const handleLogin = () => {
+  const handleLogin = (user) => {
     login();
+    setUser(user);
   };
 
   return (
@@ -45,7 +48,7 @@ const Login = () => {
                   } else {
                     err.innerHTML = "";
                     err.style.visibility = "hidden";
-                    handleLogin();
+                    handleLogin(ok.data);
                     navigate("/", { replace: true });
                   }
                 }}
