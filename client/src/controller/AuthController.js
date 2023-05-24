@@ -19,7 +19,7 @@ let submitRegister = async (data, callback) => {
     }
 };
 
-let submitLogin = async (user, pass, callback) => {
+let submitLogin = async (user, pass) => {
     try {
         let res = await axios.post(endpoint.concat(path.login),
             JSON.stringify(user, pass),
