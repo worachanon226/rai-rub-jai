@@ -2,6 +2,7 @@ import API from "./API"
 import axios from "axios"
 let { endpoint, path } = API;
 
+
 let submitRegister = async (data, callback) => {
     try {
         let res = await axios.post(endpoint.concat(path.register),
@@ -18,16 +19,15 @@ let submitRegister = async (data, callback) => {
     }
 };
 
-let submitLogin = async (data, callback) => {
+let submitLogin = async (user, pass, callback) => {
     try {
         let res = await axios.post(endpoint.concat(path.login),
-            JSON.stringify(data),
+            JSON.stringify(user, pass),
             {
                 headers: { "Content-Type": "application/json" }
             }
         );
         return res
-
     }
     catch (error) {
         return error;

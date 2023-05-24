@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { submitLogin } from "../controller/AuthController";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <section className="bg-gray-50 dark:bg-gray-900">
@@ -35,6 +38,7 @@ const Login = () => {
                   } else {
                     err.innerHTML = "";
                     err.style.visibility = "hidden";
+                    navigate("/", { replace: true });
                   }
                 }}
               >
