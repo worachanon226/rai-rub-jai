@@ -1,9 +1,16 @@
 import { Link } from "react-router-dom";
 import { submitLogin } from "../controller/AuthController";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../controller/AuthContext";
+import { useContext } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
+
+  const handleLogin = () => {
+    login();
+  };
 
   return (
     <>
@@ -38,6 +45,7 @@ const Login = () => {
                   } else {
                     err.innerHTML = "";
                     err.style.visibility = "hidden";
+                    handleLogin();
                     navigate("/", { replace: true });
                   }
                 }}
