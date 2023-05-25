@@ -22,19 +22,6 @@ func PostExpense(c *fiber.Ctx) error {
 		})
 	}
 
-	// layout := "2006-01-02 15:04:05 -0700 MST m=+0.000000001"
-	// parsedTime, err := time.Parse(layout, req.Date.String())
-	// if err != nil {
-	// 	return c.Status(fiber.ErrBadRequest.Code).JSON(fiber.Map{
-	// 		"status":      fiber.ErrBadRequest.Message,
-	// 		"status_code": fiber.ErrBadRequest.Code,
-	// 		"message":     "Failed to parse time: " + err.Error(),
-	// 		"result":      nil,
-	// 	})
-	// }
-
-	// req.Date = parsedTime
-
 	err := service.PostExpense(req)
 	if err != nil {
 		return err
