@@ -2,6 +2,7 @@ package controller
 
 import (
 	"encoding/json"
+	"fmt"
 	"rai-rub-jai/backend/modules/entities"
 	"rai-rub-jai/backend/pkg/service"
 
@@ -9,7 +10,7 @@ import (
 )
 
 type Str struct {
-	S string `json:"s" bson:"s"`
+	S string `json:"str" bson:"str"`
 }
 
 func NewExpensesController(r fiber.Router) {
@@ -42,6 +43,8 @@ func GetExpenses(c *fiber.Ctx) error {
 	if err := c.BodyParser(req); err != nil {
 		return err
 	}
+
+	fmt.Println(req)
 
 	exs, err := service.GetExpenses(req.S)
 	if err != nil {
