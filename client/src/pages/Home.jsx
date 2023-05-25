@@ -1,6 +1,16 @@
 import { Link } from "react-router-dom";
+import { UserContext } from "../UserContext";
+import { useContext } from "react";
 
 const Home = () => {
+  const { user } = useContext(UserContext);
+  let link = "";
+  if (user) {
+    link = "/lists";
+  } else {
+    link = "/login";
+  }
+
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="flex py-8 px-4 mx-auto max-w-screen-xl text-center align-middle lg:py-16 h-screen">
@@ -14,7 +24,7 @@ const Home = () => {
           </p>
           <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
             <Link
-              to={"/login"}
+              to={link}
               className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
             >
               Get started

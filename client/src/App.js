@@ -4,27 +4,25 @@ import { AuthProvider } from "./AuthContext";
 import Nav from "./pages/components/Nav";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-import About from "./pages/About";
+import Lists from "./pages/Lists";
 import Home from "./pages/Home"
 import './App.css';
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<AuthProvider><Nav /></AuthProvider>}>
-          <Route index element={<Home />} />
+      <AuthProvider>
+        <Nav />
+        <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-
           <Route element={<ProtectedRoute />}>
-            <Route path="/about" element={<About />}></Route>
+            <Route path="/lists" element={<Lists />} />
           </Route>
-
-
-        </Route>
-      </Routes>
-    </BrowserRouter >
+        </Routes>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 
