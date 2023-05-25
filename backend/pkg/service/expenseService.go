@@ -49,3 +49,15 @@ func PostExpense(req *entities.PostExpenseReq) error {
 
 	return nil
 }
+
+func GetExpenses(req string) ([]entities.Expense, error) {
+	filter := bson.D{{Key: "userid", Value: req}}
+	var exs entities.Expenses
+
+	err := coll.ExpenseCollection.FindOne(context.TODO(), filter).Decode(&exs)
+	if err != nil {
+		return nil, err
+	}
+
+	return exs.Expenses, nil
+}
