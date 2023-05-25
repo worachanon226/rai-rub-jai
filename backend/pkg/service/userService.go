@@ -23,11 +23,10 @@ func UserRegister(req *entities.UserRegisterReq) (*entities.UserRegisterRes, err
 		HashPass: string(hashed),
 	}
 
-	r, err := coll.UserCollection.InsertOne(context.Background(), user)
+	_, err = coll.UserCollection.InsertOne(context.TODO(), user)
 	if err != nil {
 		return nil, err
 	}
-	_ = r
 
 	res := &entities.UserRegisterRes{
 		UserID: user.UserID,
