@@ -22,6 +22,10 @@ func checkDupUser(c *fiber.Ctx) error {
 	return c.SendString(strconv.FormatBool(ch))
 }
 
+func check(c *fiber.Ctx) error {
+	return c.SendString("Server is Running")
+}
+
 func register(c *fiber.Ctx) error {
 	req := new(entities.UserRegisterReq)
 	fmt.Println(req)
