@@ -9,7 +9,7 @@ import (
 )
 
 func NewExpensesController(r fiber.Router) {
-	r.Get("/user/getexpense", GetExpenses)
+	r.Get("/user/getexpense/:id", GetExpenses)
 	r.Post("/user/postexpense", PostExpense)
 }
 

@@ -5,12 +5,10 @@ let { endpoint, path } = API;
 let getExpenses = async (d) => {
     try {
         let res = await axios.get(endpoint.concat(path.getExpenses) + "/" + d);
-        console.log(res.data)
 
         return res;
     }
     catch (error) {
-        console.log(error.response)
         return error;
     }
 }
