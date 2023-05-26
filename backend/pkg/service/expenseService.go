@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"fmt"
 	"rai-rub-jai/backend/modules/entities"
 	"time"
 
@@ -52,7 +51,6 @@ func PostExpense(req *entities.PostExpenseReq) error {
 }
 
 func GetExpenses(req string) ([]entities.Expense, error) {
-	fmt.Println(req)
 	filter := bson.D{{Key: "userid", Value: req}}
 	var exs entities.Expenses
 

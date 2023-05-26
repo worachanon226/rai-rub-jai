@@ -2,16 +2,11 @@ package controller
 
 import (
 	"encoding/json"
-	"fmt"
 	"rai-rub-jai/backend/modules/entities"
 	"rai-rub-jai/backend/pkg/service"
 
 	"github.com/gofiber/fiber/v2"
 )
-
-type Str struct {
-	S string `json:"str" bson:"str"`
-}
 
 func NewExpensesController(r fiber.Router) {
 	r.Get("/user/getexpense", GetExpenses)
@@ -38,15 +33,9 @@ func PostExpense(c *fiber.Ctx) error {
 }
 
 func GetExpenses(c *fiber.Ctx) error {
-	req := new(Str)
+	req := string(c.Body())
 
-	if err := c.BodyParser(req); err != nil {
-		return err
-	}
-
-	fmt.Println(req)
-
-	exs, err := service.GetExpenses(req.S)
+	exs, err := service.GetExpenses(req)
 	if err != nil {
 		return err
 	}
