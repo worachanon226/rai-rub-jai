@@ -9,7 +9,7 @@ import (
 )
 
 func NewExpensesController(r fiber.Router) {
-	r.Get("/user/getexpense", GetExpenses)
+	r.Get("/user/getexpense/:id", GetExpenses)
 	r.Post("/user/postexpense", PostExpense)
 }
 
@@ -33,7 +33,7 @@ func PostExpense(c *fiber.Ctx) error {
 }
 
 func GetExpenses(c *fiber.Ctx) error {
-	req := string(c.Body())
+	req := c.Params("id")
 
 	exs, err := service.GetExpenses(req)
 	if err != nil {

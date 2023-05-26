@@ -8,7 +8,7 @@ const Lists = () => {
   let [expenseList, setExpenseList] = useState();
 
   if (expenseList === undefined) {
-    console.log(getExpenses(user.id));
+    setExpenseList(getExpenses(user.id));
   }
 
   return (
