@@ -1,9 +1,18 @@
 import { useContext, useState, useEffect } from "react";
 
 const Actionmodal = () => {
-  const [selectedOption, setSelectedOption] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
   const types = ["Expense", "Revenue"];
+
+  const [value, setValue] = useState("");
+  const [title, setTitle] = useState("");
+  const [detail, setDetail] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const handleToggleModal = () => {
+    setModalOpen(!isModalOpen);
+  };
 
   const handleToggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -14,14 +23,16 @@ const Actionmodal = () => {
     setIsOpen(false);
   };
 
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [value, setValue] = useState("");
-  const [title, setTitle] = useState("");
-  const [detail, setDetail] = useState("");
-  const [type, setType] = useState("");
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const handleToggleModal = () => {
-    setModalOpen(!isModalOpen);
+    // axios
+    //   .post("/your-api-endpoint", { value, title, detail, selectedOption })
+    //   .then(function (response) {
+    //     console.log(response.data);
+    //   })
+    //   .catch(function (error) {
+    //     console.error(error);
   };
 
   return (
@@ -72,7 +83,7 @@ const Actionmodal = () => {
                         className="w-full px-4 py-2 text-sm border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
                       />
                       {isOpen && (
-                        <div className="absolute z-10 w-full mt-2 bg-white rounded-md shadow-lg">
+                        <div className="absolute z-10 w-1/2 mt-2 bg-white rounded-md shadow-lg left-1/2 transform -translate-x-1/2">
                           {types.map((type) => (
                             <div
                               key={type}
@@ -148,6 +159,7 @@ const Actionmodal = () => {
                     <div className="flex justify-end">
                       <button
                         type="submit"
+                        onSubmit={handleSubmit}
                         className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
                       >
                         Send
