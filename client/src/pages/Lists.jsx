@@ -8,29 +8,6 @@ const Lists = () => {
   const { user } = useContext(UserContext);
   const [expenseList, setExpenseList] = useState([]);
 
-  const [selectedOption, setSelectedOption] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
-  const types = ["Expense", "Revenue"];
-
-  const handleToggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleSelectOption = (type) => {
-    setSelectedOption(type);
-    setIsOpen(false);
-  };
-
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [value, setValue] = useState("");
-  const [title, setTitle] = useState("");
-  const [detail, setDetail] = useState("");
-  const [type, setType] = useState("");
-
-  const handleToggleModal = () => {
-    setModalOpen(!isModalOpen);
-  };
-
   const getExp = (s) => {
     getExpenses(s)
       .then((res) => {
