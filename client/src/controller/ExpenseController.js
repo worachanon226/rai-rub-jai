@@ -3,11 +3,11 @@ import axios from "axios"
 let { endpoint, path } = API;
 
 let getExpenses = async (d) => {
-    console.log("in controller: " + d)
     try {
         let res = await axios.get(endpoint.concat(path.getExpenses) + "/" + d);
+        console.log(res.data)
 
-        return res.data;
+        return res;
     }
     catch (error) {
         console.log(error.response)

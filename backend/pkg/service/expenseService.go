@@ -36,6 +36,7 @@ func PostExpense(req *entities.PostExpenseReq) error {
 		Title:  req.Title,
 		Detail: req.Detail,
 		Value:  req.Value,
+		Type:   "expense",
 	}
 
 	ex.Expenses = append(ex.Expenses, newpost)

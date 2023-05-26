@@ -14,4 +14,5 @@ type Revenue struct {
 	Title  string    `json:"title" bson:"title"`
 	Detail string    `json:"detail" bson:"detail"`
 	Value  int64     `json:"value" bson:"value"`
+	Type   string    `json:"type" bson:"type"`
 }
