@@ -1,7 +1,49 @@
 package controller
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"encoding/json"
+	"rai-rub-jai/backend/modules/entities"
+	"rai-rub-jai/backend/pkg/service"
+
+	"github.com/gofiber/fiber/v2"
+)
 
 func NewRevenuesController(r fiber.Router) {
+	r.Get("/user/getrevenue", GetRevenue)
+	r.Post("/user/postrevenue", PostRevenue)
+}
 
+func PostRevenue(c *fiber.Ctx) error {
+	req := new(entities.PostRevenueReq)
+	if err := c.BodyParser(req); err != nil {
+		return c.Status(fiber.ErrBadRequest.Code).JSON(fiber.Map{
+			"status":      fiber.ErrBadRequest.Message,
+			"status_code": fiber.ErrBadRequest.Code,
+			"message":     err.Error(),
+			"result":      nil,
+		})
+	}
+
+	err := service.PostRevenue(req)
+	if err != nil {
+		return err
+	}
+
+	return c.SendString("Post successfully")
+}
+
+func GetRevenue(c *fiber.Ctx) error {
+	req := c.Params("id")
+
+	exs, err := service.GetRevenue(req)
+	if err != nil {
+		return err
+	}
+
+	res, err := json.Marshal(exs)
+	if err != nil {
+		return err
+	}
+
+	return c.SendString(string(res))
 }
