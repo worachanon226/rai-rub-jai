@@ -27,6 +27,7 @@ const Lists = () => {
       .then((res) => {
         setRevenueList(res.data);
         lists = lists.concat(res.data);
+        lists.sort(compare);
         setList(lists);
       })
       .catch((error) => {
@@ -34,13 +35,23 @@ const Lists = () => {
       });
   };
 
+  function compare(a, b) {
+    if (a.date < b.date) {
+      return -1;
+    } else if (a.date > b.date) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
   useEffect(() => {
     getLists(user.id);
   }, [user.id]);
 
   return (
     <>
-      <div className="bg-white dark:bg-gray-900 mt-16 h-screen">
+      <div className="bg-white dark:bg-gray-900 mt-16 h-full">
         <div className="py-8 px-4 text-center lg:py-16">
           <Actionmodal callback={getLists} />
 
