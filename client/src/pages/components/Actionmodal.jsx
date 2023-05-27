@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { UserContext } from "../../UserContext";
 import { postExpense } from "../../controller/ExpenseController";
+import { postRevenue } from "../../controller/RevenueController";
 
 const Actionmodal = ({ callback }) => {
   const types = ["Expense", "Revenue"];
@@ -32,6 +33,15 @@ const Actionmodal = ({ callback }) => {
 
     if (selectedOption === "Expense") {
       postExpense(user.id, title, detail, value)
+        .then((res) => {
+          console.log(res);
+          callback(user.id);
+        })
+        .catch((error) => {
+          console.error("Error posting expenses:", error);
+        });
+    } else if (selectedOption === "Revenue") {
+      postRevenue(user.id, title, detail, value)
         .then((res) => {
           console.log(res);
           callback(user.id);
