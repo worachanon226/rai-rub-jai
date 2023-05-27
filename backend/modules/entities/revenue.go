@@ -5,7 +5,7 @@ import "time"
 type Revenues struct {
 	ID       string    `json:"id" bson:"_id"`
 	UserID   string    `json:"userid" bson:"userid"`
-	Revenues []Revenue `json:"expenses" bson:"expenses"`
+	Revenues []Revenue `json:"revenues" bson:"revenues"`
 }
 
 type Revenue struct {

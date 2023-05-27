@@ -12,18 +12,18 @@ import (
 
 func PostRevenue(req *entities.PostRevenueReq) error {
 	filter := bson.D{{Key: "userid", Value: req.UserID}}
-	var ex entities.Revenues
+	var re entities.Revenues
 
-	err := coll.RevenueCollection.FindOne(context.TODO(), filter).Decode(&ex)
+	err := coll.RevenueCollection.FindOne(context.TODO(), filter).Decode(&re)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
-			ex = entities.Revenues{
+			re = entities.Revenues{
 				ID:       uuid.New().String(),
 				UserID:   req.UserID,
 				Revenues: []entities.Revenue{},
 			}
 
-			_, err := coll.RevenueCollection.InsertOne(context.TODO(), ex)
+			_, err := coll.RevenueCollection.InsertOne(context.TODO(), re)
 			if err != nil {
 				return err
 			}
@@ -39,10 +39,10 @@ func PostRevenue(req *entities.PostRevenueReq) error {
 		Type:   "revenue",
 	}
 
-	ex.Revenues = append(ex.Revenues, newpost)
+	re.Revenues = append(re.Revenues, newpost)
 
-	filter = bson.D{{Key: "userid", Value: ex.UserID}}
-	update := bson.D{{Key: "$set", Value: bson.D{{Key: "revenues", Value: ex.Revenues}}}}
+	filter = bson.D{{Key: "userid", Value: re.UserID}}
+	update := bson.D{{Key: "$set", Value: bson.D{{Key: "revenues", Value: re.Revenues}}}}
 	_, err = coll.RevenueCollection.UpdateOne(context.TODO(), filter, update)
 	if err != nil {
 		return err
