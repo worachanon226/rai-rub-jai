@@ -9,6 +9,7 @@ const Lists = () => {
   const [expenseList, setExpenseList] = useState([]);
 
   const getExp = (s) => {
+    console.log("Refresh");
     getExpenses(s)
       .then((res) => {
         setExpenseList(res.data);
@@ -26,7 +27,7 @@ const Lists = () => {
     <>
       <div className="bg-white dark:bg-gray-900 mt-16 h-screen">
         <div className="py-8 px-4 text-center lg:py-16">
-          <Actionmodal />
+          <Actionmodal callback={getExp} />
 
           <div className="mt-5 flex flex-wrap justify-center">
             {expenseList.map((expense) => (

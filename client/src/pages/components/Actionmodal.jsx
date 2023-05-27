@@ -1,6 +1,8 @@
-import { useContext, useState, useEffect } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../../UserContext";
+import { postExpense } from "../../controller/ExpenseController";
 
-const Actionmodal = () => {
+const Actionmodal = ({ callback }) => {
   const types = ["Expense", "Revenue"];
 
   const [value, setValue] = useState("");
@@ -9,6 +11,8 @@ const Actionmodal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
+
+  const { user } = useContext(UserContext);
 
   const handleToggleModal = () => {
     setModalOpen(!isModalOpen);
@@ -25,6 +29,18 @@ const Actionmodal = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (selectedOption === "Expense") {
+      postExpense(user.id, title, detail, value)
+        .then((res) => {
+          console.log(res);
+          callback(user.id);
+        })
+        .catch((error) => {
+          console.error("Error posting expenses:", error);
+        });
+    }
+    handleToggleModal();
 
     // axios
     //   .post("/your-api-endpoint", { value, title, detail, selectedOption })
@@ -66,7 +82,7 @@ const Actionmodal = () => {
                 </div>
 
                 <div className="mt-5 w-full">
-                  <form>
+                  <form onSubmit={handleSubmit}>
                     <div className="flex mb-4">
                       <label
                         htmlFor="type"
@@ -159,7 +175,6 @@ const Actionmodal = () => {
                     <div className="flex justify-end">
                       <button
                         type="submit"
-                        onSubmit={handleSubmit}
                         className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
                       >
                         Send
