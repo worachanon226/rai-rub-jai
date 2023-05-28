@@ -3,6 +3,7 @@ import List from "./components/List";
 import { UserContext } from "../UserContext";
 import { getExpenses } from "../controller/ExpenseController";
 import { getRevenues } from "../controller/RevenueController";
+import CustomDatePicker from "./components/DatePicker";
 import Actionmodal from "./components/Actionmodal";
 
 const Lists = () => {
@@ -53,6 +54,10 @@ const Lists = () => {
     <>
       <div className="bg-white dark:bg-gray-900 mt-16 h-full">
         <div className="py-8 px-4 text-center lg:py-16">
+          <div className="container mx-auto my-4">
+            <h1 className="text-2xl font-bold">Date Picker Example</h1>
+            <CustomDatePicker />
+          </div>
           <Actionmodal callback={getLists} />
 
           <div className="mt-5 flex flex-wrap justify-center">
