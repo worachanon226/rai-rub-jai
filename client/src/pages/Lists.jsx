@@ -63,6 +63,7 @@ const Lists = () => {
                 title={obj.title}
                 detail={obj.detail}
                 value={obj.value}
+                d={obj.date}
               />
             ))}
           </div>
