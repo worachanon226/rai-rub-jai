@@ -27,16 +27,25 @@ const Lists = () => {
 
     try {
       const revenueResponse = await getRevenues(s);
-      revenuesList = revenueResponse.data;
+      revenueLists = revenueResponse.data;
     } catch (error) {
       console.error("Error fetching revenue:", error);
     }
 
-    lists = expenseLists.concat(revenueLists);
+    console.log(expenseLists);
+
+    if (expenseLists != undefined) {
+      lists = expenseLists;
+      setExpensesList(expenseLists);
+    }
+    if (revenueLists != undefined) {
+      if (expenseLists == undefined) lists = revenueLists;
+      else lists = expenseLists.concat(revenueLists);
+      setRevenuesList(revenueLists);
+    }
+
     lists.sort(compare);
     setList(lists);
-    setExpensesList(expensesList);
-    setRevenuesList(revenuesList);
   };
 
   function compare(a, b) {
@@ -73,7 +82,7 @@ const Lists = () => {
           </div>
         </div>
       </div>
-      <BottomNav expensesList={expensesList} />
+      <BottomNav revenuesList={revenuesList} expensesList={expensesList} />
     </>
   );
 };
