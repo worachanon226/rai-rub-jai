@@ -5,6 +5,8 @@ import Actionmodal from "./components/Actionmodal";
 import { UserContext } from "../UserContext";
 import List from "./components/List";
 import BottomNav from "./components/BottomNav";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Lists = () => {
   let lists = [];
@@ -12,6 +14,7 @@ const Lists = () => {
   const [list, setList] = useState([]);
   const [expensesList, setExpensesList] = useState([]);
   const [revenuesList, setRevenuesList] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null);
 
   const getLists = async (s) => {
     lists = [];
@@ -44,8 +47,19 @@ const Lists = () => {
       setRevenuesList(revenueLists);
     }
 
+    if (selectedDate) {
+      lists = lists.filter((obj) => {
+        const objDate = new Date(obj.date);
+        return objDate.toDateString() === selectedDate.toDateString();
+      });
+    }
+
     lists.sort(compare);
     setList(lists);
+  };
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
   };
 
   function compare(a, b) {
@@ -60,12 +74,20 @@ const Lists = () => {
 
   useEffect(() => {
     getLists(user.id);
-  }, [user.id]);
+  }, [user.id, selectedDate]);
 
   return (
     <>
       <div className="bg-white dark:bg-gray-900 mt-16 min-h-screen max-h-full">
         <div className="py-8 px-4 text-center lg:py-16">
+          <div className="py-8 px-4 text-center lg:py-16">
+            <DatePicker
+              selected={selectedDate}
+              onChange={handleDateChange}
+              dateFormat="yyyy-MM-dd"
+              placeholderText="Select a date"
+            />
+          </div>
           <Actionmodal callback={getLists} />
 
           <div className="mt-5 flex flex-wrap justify-center">
