@@ -15,12 +15,12 @@ const BottomNav = ({ expensesList, revenuesList }) => {
         <div className="flex items-center justify-center text-white ">
           <div className="basis-1/3 flex ml-4">
             <div className="font-bold text-lg">
-              Total Expenses: {totalExpenses}
+              Total Revenses: {totalRevenues}
             </div>
           </div>
           <div className="basis-1/3 flex ml-4">
             <div className="font-bold text-lg">
-              Total Revenses: {totalRevenues}
+              Total Expenses: {totalExpenses}
             </div>
           </div>
           <div className="basis-1/3 flex ml-4">
