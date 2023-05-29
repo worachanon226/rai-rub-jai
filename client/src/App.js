@@ -1,6 +1,5 @@
 import ProtectedRoute from "./ProtectedRoute";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import BottomNav from "./pages/components/BottomNav";
 import { AuthProvider } from "./AuthContext";
 import Nav from "./pages/components/Nav";
 import Signup from "./pages/Signup";
@@ -22,7 +21,6 @@ function App() {
             <Route path="/lists" element={<Lists />} />
           </Route>
         </Routes>
-        <BottomNav />
       </AuthProvider>
     </BrowserRouter>
   );

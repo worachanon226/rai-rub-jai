@@ -59,14 +59,6 @@ const Actionmodal = ({ callback }) => {
     }
     handleToggleModal();
     clearValue();
-
-    // axios
-    //   .post("/your-api-endpoint", { value, title, detail, selectedOption })
-    //   .then(function (response) {
-    //     console.log(response.data);
-    //   })
-    //   .catch(function (error) {
-    //     console.error(error);
   };
 
   return (

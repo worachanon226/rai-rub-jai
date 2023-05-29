@@ -4,11 +4,14 @@ import { useContext, useState, useEffect } from "react";
 import Actionmodal from "./components/Actionmodal";
 import { UserContext } from "../UserContext";
 import List from "./components/List";
+import BottomNav from "./components/BottomNav";
 
 const Lists = () => {
   let lists = [];
   const { user } = useContext(UserContext);
   const [list, setList] = useState([]);
+  const [expensesList, setExpensesList] = useState([]);
+  const [revenuesList, setRevenuesList] = useState([]);
 
   const getLists = async (s) => {
     lists = [];
@@ -24,7 +27,7 @@ const Lists = () => {
 
     try {
       const revenueResponse = await getRevenues(s);
-      revenueLists = revenueResponse.data;
+      revenuesList = revenueResponse.data;
     } catch (error) {
       console.error("Error fetching revenue:", error);
     }
@@ -32,6 +35,8 @@ const Lists = () => {
     lists = expenseLists.concat(revenueLists);
     lists.sort(compare);
     setList(lists);
+    setExpensesList(expensesList);
+    setRevenuesList(revenuesList);
   };
 
   function compare(a, b) {
@@ -68,6 +73,7 @@ const Lists = () => {
           </div>
         </div>
       </div>
+      <BottomNav expensesList={expensesList} />
     </>
   );
 };
