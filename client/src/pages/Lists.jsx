@@ -1,9 +1,9 @@
-import { useContext, useState, useEffect } from "react";
-import List from "./components/List";
-import { UserContext } from "../UserContext";
 import { getExpenses } from "../controller/ExpenseController";
 import { getRevenues } from "../controller/RevenueController";
+import { useContext, useState, useEffect } from "react";
 import Actionmodal from "./components/Actionmodal";
+import { UserContext } from "../UserContext";
+import List from "./components/List";
 
 const Lists = () => {
   let lists = [];
