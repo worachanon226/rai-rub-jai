@@ -4,35 +4,35 @@ import { UserContext } from "../UserContext";
 import { getExpenses } from "../controller/ExpenseController";
 import { getRevenues } from "../controller/RevenueController";
 import Actionmodal from "./components/Actionmodal";
+import { setRevalidateHeaders } from "next/dist/server/send-payload";
 
 const Lists = () => {
   let lists = [];
   const { user } = useContext(UserContext);
-  const [expenseList, setExpenseList] = useState([]);
-  const [revenueList, setRevenueList] = useState([]);
   const [list, setList] = useState([]);
 
-  const getLists = (s) => {
+  const getLists = async (s) => {
     lists = [];
-    getExpenses(s)
-      .then((res) => {
-        setExpenseList(res.data);
-        lists = res.data;
-      })
-      .catch((error) => {
-        console.error("Error fetching expenses:", error);
-      });
+    let expenseLists = [];
+    let revenueLists = [];
 
-    getRevenues(s)
-      .then((res) => {
-        setRevenueList(res.data);
-        lists = lists.concat(res.data);
-        lists.sort(compare);
-        setList(lists);
-      })
-      .catch((error) => {
-        console.error("Error fetching revense:", error);
-      });
+    try {
+      const expenseResponse = await getExpenses(s);
+      expenseLists = expenseResponse.data;
+    } catch (error) {
+      console.error("Error fetching expenses:", error);
+    }
+
+    try {
+      const revenueResponse = await getRevenues(s);
+      revenueLists = revenueResponse.data;
+    } catch (error) {
+      console.error("Error fetching revenue:", error);
+    }
+
+    lists = expenseLists.concat(revenueLists);
+    lists.sort(compare);
+    setList(lists);
   };
 
   function compare(a, b) {

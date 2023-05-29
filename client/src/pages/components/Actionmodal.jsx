@@ -28,6 +28,13 @@ const Actionmodal = ({ callback }) => {
     setIsOpen(false);
   };
 
+  const clearValue = () => {
+    setValue("");
+    setTitle("");
+    setDetail("");
+    setSelectedOption("");
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -51,6 +58,7 @@ const Actionmodal = ({ callback }) => {
         });
     }
     handleToggleModal();
+    clearValue();
 
     // axios
     //   .post("/your-api-endpoint", { value, title, detail, selectedOption })
