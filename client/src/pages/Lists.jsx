@@ -4,7 +4,6 @@ import { UserContext } from "../UserContext";
 import { getExpenses } from "../controller/ExpenseController";
 import { getRevenues } from "../controller/RevenueController";
 import Actionmodal from "./components/Actionmodal";
-import { setRevalidateHeaders } from "next/dist/server/send-payload";
 
 const Lists = () => {
   let lists = [];
