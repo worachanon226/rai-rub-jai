@@ -64,7 +64,7 @@ const Lists = () => {
 
   return (
     <>
-      <div className="bg-white dark:bg-gray-900 mt-16 h-full">
+      <div className="bg-white dark:bg-gray-900 mt-16 min-h-screen max-h-full">
         <div className="py-8 px-4 text-center lg:py-16">
           <Actionmodal callback={getLists} />
 
