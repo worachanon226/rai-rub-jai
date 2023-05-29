@@ -37,12 +37,12 @@ const Lists = () => {
 
     console.log(expenseLists);
 
-    if (expenseLists != undefined) {
+    if (expenseLists !== undefined) {
       lists = expenseLists;
       setExpensesList(expenseLists);
     }
-    if (revenueLists != undefined) {
-      if (expenseLists == undefined) lists = revenueLists;
+    if (revenueLists !== undefined) {
+      if (expenseLists === undefined) lists = revenueLists;
       else lists = expenseLists.concat(revenueLists);
       setRevenuesList(revenueLists);
     }
