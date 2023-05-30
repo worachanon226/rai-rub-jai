@@ -5,8 +5,7 @@ import Actionmodal from "./components/Actionmodal";
 import { UserContext } from "../UserContext";
 import List from "./components/List";
 import BottomNav from "./components/BottomNav";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "./components/DatePicker";
 
 const Lists = () => {
   let lists = [];
@@ -90,14 +89,15 @@ const Lists = () => {
     <>
       <div className="bg-white dark:bg-gray-900 mt-16 min-h-screen max-h-full">
         <div className="py-8 px-4 text-center lg:py-16">
-          <div className="py-8 px-4 text-center lg:py-16">
+          {/* <div className="py-8 px-4 text-center lg:py-16">
             <DatePicker
               selected={selectedDate}
               onChange={handleDateChange}
               dateFormat="yyyy-MM-dd"
               placeholderText="Select a date"
             />
-          </div>
+          </div> */}
+          <DatePicker />
           <Actionmodal callback={getLists} />
 
           <div className="mt-5 flex flex-wrap justify-center">
