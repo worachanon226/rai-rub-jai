@@ -35,8 +35,6 @@ const Lists = () => {
       console.error("Error fetching revenue:", error);
     }
 
-    console.log(expenseLists);
-
     if (expenseLists !== undefined) {
       lists = expenseLists;
       setExpensesList(expenseLists);
@@ -48,6 +46,18 @@ const Lists = () => {
     }
 
     if (selectedDate) {
+      expenseLists = expenseLists.filter((obj) => {
+        const objDate = new Date(obj.date);
+        return objDate.toDateString() === selectedDate.toDateString();
+      });
+      setExpensesList(expenseLists);
+
+      revenueLists = revenueLists.filter((obj) => {
+        const objDate = new Date(obj.date);
+        return objDate.toDateString() === selectedDate.toDateString();
+      });
+      setRevenuesList(revenueLists);
+
       lists = lists.filter((obj) => {
         const objDate = new Date(obj.date);
         return objDate.toDateString() === selectedDate.toDateString();
