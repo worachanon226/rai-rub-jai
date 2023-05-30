@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 
 const DatePicker = ({ onDateChange }) => {
-  const [day, setDay] = useState("");
-  const [month, setMonth] = useState("");
-  const [year, setYear] = useState("");
+  const [day, setDay] = useState(null);
+  const [month, setMonth] = useState(null);
+  const [year, setYear] = useState(null);
 
   const handleDayChange = (selectedDay) => {
-    setDay(selectedDay);
-    updateSelectedDate(selectedDay, month, year);
+    setDay(parseInt(selectedDay));
+    updateSelectedDate(parseInt(selectedDay), month, year);
   };
 
   const handleMonthChange = (selectedMonth) => {
-    setMonth(selectedMonth);
-    updateSelectedDate(day, selectedMonth, year);
+    setMonth(parseInt(selectedMonth));
+    updateSelectedDate(day, parseInt(selectedMonth), year);
   };
 
   const handleYearChange = (selectedYear) => {
-    setYear(selectedYear);
-    updateSelectedDate(day, month, selectedYear);
+    setYear(parseInt(selectedYear));
+    updateSelectedDate(day, month, parseInt(selectedYear));
   };
 
   const updateSelectedDate = (day, month, year) => {
@@ -40,7 +40,7 @@ const DatePicker = ({ onDateChange }) => {
   };
 
   const generateDayOptions = () => {
-    const maxDays = getMaxDaysInMonth(parseInt(month), parseInt(year));
+    const maxDays = getMaxDaysInMonth(month, year);
     return Array.from({ length: maxDays }, (_, i) => i + 1).map((dayOption) => (
       <option key={dayOption} value={dayOption}>
         {dayOption}
@@ -52,8 +52,8 @@ const DatePicker = ({ onDateChange }) => {
     <div className="flex justify-center mb-5">
       <select
         className="w-1/4 py-2 px-4 border border-gray-300 rounded-l"
-        value={day}
-        onChange={handleDayChange}
+        value={day || ""}
+        onChange={(e) => handleDayChange(e.target.value)}
       >
         <option value="">Day</option>
         {generateDayOptions()}
@@ -61,8 +61,8 @@ const DatePicker = ({ onDateChange }) => {
 
       <select
         className="w-1/4 py-2 px-4 border border-gray-300"
-        value={month}
-        onChange={handleMonthChange}
+        value={month || ""}
+        onChange={(e) => handleMonthChange(e.target.value)}
       >
         <option value="">Month</option>
         {[
@@ -87,8 +87,8 @@ const DatePicker = ({ onDateChange }) => {
 
       <select
         className="w-1/4 py-2 px-4 border border-gray-300 rounded-r"
-        value={year}
-        onChange={handleYearChange}
+        value={year || ""}
+        onChange={(e) => handleYearChange(e.target.value)}
       >
         <option value="">Year</option>
         {Array.from({ length: 50 }, (_, i) => new Date().getFullYear() - i).map(

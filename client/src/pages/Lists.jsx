@@ -46,23 +46,21 @@ const Lists = () => {
 
     if (selectedDate) {
       const selectedDateObj = new Date(selectedDate);
+      console.log(selectedDateObj);
 
-      expenseLists = expenseLists.filter((obj) => {
+      const filteredExpenses = expenseLists.filter((obj) => {
         const objDate = new Date(obj.date);
         return objDate.toDateString() === selectedDateObj.toDateString();
       });
-      setExpensesList(expenseLists);
+      setExpensesList(filteredExpenses);
 
-      revenueLists = revenueLists.filter((obj) => {
+      const filteredRevenues = revenueLists.filter((obj) => {
         const objDate = new Date(obj.date);
         return objDate.toDateString() === selectedDateObj.toDateString();
       });
-      setRevenuesList(revenueLists);
+      setRevenuesList(filteredRevenues);
 
-      lists = lists.filter((obj) => {
-        const objDate = new Date(obj.date);
-        return objDate.toDateString() === selectedDateObj.toDateString();
-      });
+      lists = filteredExpenses.concat(filteredRevenues);
     }
 
     lists.sort(compare);
