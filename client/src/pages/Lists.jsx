@@ -89,14 +89,6 @@ const Lists = () => {
     <>
       <div className="bg-white dark:bg-gray-900 mt-16 min-h-screen max-h-full">
         <div className="py-8 px-4 text-center lg:py-16">
-          {/* <div className="py-8 px-4 text-center lg:py-16">
-            <DatePicker
-              selected={selectedDate}
-              onChange={handleDateChange}
-              dateFormat="yyyy-MM-dd"
-              placeholderText="Select a date"
-            />
-          </div> */}
           <DatePicker
             selected={selectedDate}
             onDateChange={handleDateChange}
