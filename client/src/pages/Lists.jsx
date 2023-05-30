@@ -45,21 +45,23 @@ const Lists = () => {
     }
 
     if (selectedDate) {
+      const selectedDateObj = new Date(selectedDate);
+
       expenseLists = expenseLists.filter((obj) => {
         const objDate = new Date(obj.date);
-        return objDate.toDateString() === selectedDate.toDateString();
+        return objDate.toDateString() === selectedDateObj.toDateString();
       });
       setExpensesList(expenseLists);
 
       revenueLists = revenueLists.filter((obj) => {
         const objDate = new Date(obj.date);
-        return objDate.toDateString() === selectedDate.toDateString();
+        return objDate.toDateString() === selectedDateObj.toDateString();
       });
       setRevenuesList(revenueLists);
 
       lists = lists.filter((obj) => {
         const objDate = new Date(obj.date);
-        return objDate.toDateString() === selectedDate.toDateString();
+        return objDate.toDateString() === selectedDateObj.toDateString();
       });
     }
 
@@ -99,7 +101,7 @@ const Lists = () => {
           </div> */}
           <DatePicker
             selected={selectedDate}
-            onChange={handleDateChange}
+            onDateChange={handleDateChange}
             dateFormat="yyyy-MM-dd"
             placeholderText="Select a date"
           />

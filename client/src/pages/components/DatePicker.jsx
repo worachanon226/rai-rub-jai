@@ -1,23 +1,28 @@
 import React, { useState } from "react";
 
-const DatePicker = ({ onDayChange, onMonthChange, onYearChange }) => {
+const DatePicker = ({ onDateChange }) => {
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
 
-  const handleDayChange = (e) => {
-    const selectedDay = e.target.value;
-    onDayChange(selectedDay);
+  const handleDayChange = (selectedDay) => {
+    setDay(selectedDay);
+    updateSelectedDate(selectedDay, month, year);
   };
 
-  const handleMonthChange = (e) => {
-    const selectedMonth = e.target.value;
-    onMonthChange(selectedMonth);
+  const handleMonthChange = (selectedMonth) => {
+    setMonth(selectedMonth);
+    updateSelectedDate(day, selectedMonth, year);
   };
 
-  const handleYearChange = (e) => {
-    const selectedYear = e.target.value;
-    onYearChange(selectedYear);
+  const handleYearChange = (selectedYear) => {
+    setYear(selectedYear);
+    updateSelectedDate(day, month, selectedYear);
+  };
+
+  const updateSelectedDate = (day, month, year) => {
+    const formattedDate = `${year}-${month}-${day}`;
+    onDateChange(formattedDate);
   };
 
   const getMaxDaysInMonth = (month, year) => {
