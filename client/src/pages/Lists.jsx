@@ -45,18 +45,31 @@ const Lists = () => {
     }
 
     if (selectedDate) {
-      const selectedDateObj = new Date(selectedDate);
-      console.log(selectedDateObj);
+      const selectedDateObj = selectedDate.split("-")[2];
+      const selectedMonthObj = selectedDate.split("-")[1];
+      const selectedYearObj = selectedDate.split("-")[0];
 
       const filteredExpenses = expenseLists.filter((obj) => {
-        const objDate = new Date(obj.date);
-        return objDate.toDateString() === selectedDateObj.toDateString();
+        const objDate = new Date(obj.date).getDate().toString();
+        const objMonth = (new Date(obj.date).getMonth() + 1).toString();
+        const objYear = new Date(obj.date).getFullYear().toString();
+        return (
+          objDate === selectedDateObj &&
+          objMonth === selectedMonthObj &&
+          objYear === selectedYearObj
+        );
       });
       setExpensesList(filteredExpenses);
 
       const filteredRevenues = revenueLists.filter((obj) => {
-        const objDate = new Date(obj.date);
-        return objDate.toDateString() === selectedDateObj.toDateString();
+        const objDate = new Date(obj.date).getDate().toString();
+        const objMonth = (new Date(obj.date).getMonth() + 1).toString();
+        const objYear = new Date(obj.date).getFullYear().toString();
+        return (
+          objDate === selectedDateObj ||
+          objMonth === selectedMonthObj ||
+          objYear === selectedYearObj
+        );
       });
       setRevenuesList(filteredRevenues);
 
