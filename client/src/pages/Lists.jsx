@@ -9,8 +9,8 @@ import DatePicker from "./components/DatePicker";
 
 const Lists = () => {
   let lists = [];
-  const { user } = useContext(UserContext);
   const [list, setList] = useState([]);
+  const { user } = useContext(UserContext);
   const [expensesList, setExpensesList] = useState([]);
   const [revenuesList, setRevenuesList] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -97,7 +97,12 @@ const Lists = () => {
               placeholderText="Select a date"
             />
           </div> */}
-          <DatePicker />
+          <DatePicker
+            selected={selectedDate}
+            onChange={handleDateChange}
+            dateFormat="yyyy-MM-dd"
+            placeholderText="Select a date"
+          />
           <Actionmodal callback={getLists} />
 
           <div className="mt-5 flex flex-wrap justify-center">
