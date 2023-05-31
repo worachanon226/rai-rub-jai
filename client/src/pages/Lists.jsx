@@ -49,28 +49,59 @@ const Lists = () => {
       const selectedMonthObj = selectedDate.split("-")[1];
       const selectedYearObj = selectedDate.split("-")[0];
 
-      const filteredExpenses = expenseLists.filter((obj) => {
-        const objDate = new Date(obj.date).getDate().toString();
-        const objMonth = (new Date(obj.date).getMonth() + 1).toString();
-        const objYear = new Date(obj.date).getFullYear().toString();
-        return (
-          objDate === selectedDateObj &&
-          objMonth === selectedMonthObj &&
-          objYear === selectedYearObj
-        );
-      });
+      const filteredExpenses = expenseLists
+        .filter((obj) => {
+          if (selectedYearObj === "NaN" || selectedYearObj === "null") {
+            return true;
+          } else {
+            const objYear = new Date(obj.date).getFullYear().toString();
+            return objYear === selectedYearObj;
+          }
+        })
+        .filter((obj) => {
+          if (selectedMonthObj === "NaN" || selectedMonthObj === "null") {
+            return true;
+          } else {
+            const objMonth = (new Date(obj.date).getMonth() + 1).toString();
+            return objMonth === selectedMonthObj;
+          }
+        })
+        .filter((obj) => {
+          if (selectedDateObj === "NaN" || selectedDateObj === "null") {
+            return true;
+          } else {
+            const objDate = new Date(obj.date).getDate().toString();
+            return objDate === selectedDateObj;
+          }
+        });
+
       setExpensesList(filteredExpenses);
 
-      const filteredRevenues = revenueLists.filter((obj) => {
-        const objDate = new Date(obj.date).getDate().toString();
-        const objMonth = (new Date(obj.date).getMonth() + 1).toString();
-        const objYear = new Date(obj.date).getFullYear().toString();
-        return (
-          objDate === selectedDateObj ||
-          objMonth === selectedMonthObj ||
-          objYear === selectedYearObj
-        );
-      });
+      const filteredRevenues = revenueLists
+        .filter((obj) => {
+          if (selectedYearObj === "NaN" || selectedYearObj === "null") {
+            return true;
+          } else {
+            const objYear = new Date(obj.date).getFullYear().toString();
+            return objYear === selectedYearObj;
+          }
+        })
+        .filter((obj) => {
+          if (selectedMonthObj === "NaN" || selectedMonthObj === "null") {
+            return true;
+          } else {
+            const objMonth = (new Date(obj.date).getMonth() + 1).toString();
+            return objMonth === selectedMonthObj;
+          }
+        })
+        .filter((obj) => {
+          if (selectedDateObj === "NaN" || selectedDateObj === "null") {
+            return true;
+          } else {
+            const objDate = new Date(obj.date).getDate().toString();
+            return objDate === selectedDateObj;
+          }
+        });
       setRevenuesList(filteredRevenues);
 
       lists = filteredExpenses.concat(filteredRevenues);
