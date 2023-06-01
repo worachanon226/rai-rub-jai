@@ -11,6 +11,7 @@ import (
 func NewRevenuesController(r fiber.Router) {
 	r.Get("/user/getrevenue/:id", GetRevenue)
 	r.Post("/user/postrevenue", PostRevenue)
+	r.Post("/user/deleterevenue", DeleteRevenue)
 }
 
 func PostRevenue(c *fiber.Ctx) error {
@@ -33,7 +34,21 @@ func PostRevenue(c *fiber.Ctx) error {
 }
 
 func DeleteRevenue(c *fiber.Ctx) error {
-	return nil
+	type Request struct {
+		Userid string `json:"userid" bson:"userid"`
+		Listid string `json:"listid" bson:"listid"`
+	}
+
+	req := new(Request)
+	if err := c.BodyParser(req); err != nil {
+		return err
+	}
+
+	if err := service.DeleteRevenue(req.Userid, req.Listid); err != nil {
+		return err
+	}
+
+	return c.SendString("Delete successfully")
 }
 
 func GetRevenue(c *fiber.Ctx) error {

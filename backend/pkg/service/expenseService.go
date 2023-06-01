@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"fmt"
 	"rai-rub-jai/backend/modules/entities"
 	"time"
 
@@ -43,6 +44,31 @@ func PostExpense(req *entities.PostExpenseReq) error {
 
 	filter = bson.D{{Key: "userid", Value: ex.UserID}}
 	update := bson.D{{Key: "$set", Value: bson.D{{Key: "expenses", Value: ex.Expenses}}}}
+	_, err = coll.ExpenseCollection.UpdateOne(context.TODO(), filter, update)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func DeleteExpense(userid string, listid string) error {
+	filter := bson.D{{Key: "userid", Value: userid}}
+	var exs entities.Expenses
+
+	err := coll.ExpenseCollection.FindOne(context.TODO(), filter).Decode(&exs)
+	if err != nil {
+		return err
+	}
+
+	for i := 0; i < len(exs.Expenses); i++ {
+		if exs.Expenses[i].ID == listid {
+			exs.Expenses = append(exs.Expenses[:i], exs.Expenses[i+1:]...)
+		}
+		fmt.Println(exs.Expenses)
+	}
+
+	update := bson.D{{Key: "$set", Value: bson.D{{Key: "expenses", Value: exs}}}}
 	_, err = coll.ExpenseCollection.UpdateOne(context.TODO(), filter, update)
 	if err != nil {
 		return err
