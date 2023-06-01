@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"fmt"
 	"rai-rub-jai/backend/modules/entities"
 	"time"
 
@@ -51,11 +52,24 @@ func PostRevenue(req *entities.PostRevenueReq) error {
 	return nil
 }
 
-func DeleRevenue(userid string, listid string) error {
+func DeleteRevenue(userid string, listid string) error {
 	filter := bson.D{{Key: "userid", Value: userid}}
 	var rvs entities.Revenues
 
 	err := coll.RevenueCollection.FindOne(context.TODO(), filter).Decode(&rvs)
+	if err != nil {
+		return err
+	}
+
+	for i := 0; i < len(rvs.Revenues); i++ {
+		if rvs.Revenues[i].ID == listid {
+			rvs.Revenues = append(rvs.Revenues[:i], rvs.Revenues[i+1:]...)
+		}
+		fmt.Println(rvs.Revenues)
+	}
+
+	update := bson.D{{Key: "$set", Value: bson.D{{Key: "revenues", Value: rvs}}}}
+	_, err = coll.RevenueCollection.UpdateOne(context.TODO(), filter, update)
 	if err != nil {
 		return err
 	}
