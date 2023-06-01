@@ -67,6 +67,7 @@ Date: ${date}
       {showDetails && (
         <div className="mt-2 bg-gray-600 p-2 rounded float-left">
           <textarea
+            readOnly
             id="message"
             className="block p-2.5 w-full text-sm text-gray-900 bg-black rounded-lg border border-gray-900 resize-none dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
             style={{ height: `${text.split("\n").length * 1.3}rem` }}
