@@ -51,6 +51,18 @@ func PostRevenue(req *entities.PostRevenueReq) error {
 	return nil
 }
 
+func DeleRevenue(userid string, listid string) error {
+	filter := bson.D{{Key: "userid", Value: userid}}
+	var rvs entities.Revenues
+
+	err := coll.RevenueCollection.FindOne(context.TODO(), filter).Decode(&rvs)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func GetRevenue(req string) ([]entities.Revenue, error) {
 	filter := bson.D{{Key: "userid", Value: req}}
 	var exs entities.Revenues

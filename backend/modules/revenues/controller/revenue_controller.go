@@ -32,6 +32,10 @@ func PostRevenue(c *fiber.Ctx) error {
 	return c.SendString("Post successfully")
 }
 
+func DeleteRevenue(c *fiber.Ctx) error {
+	return nil
+}
+
 func GetRevenue(c *fiber.Ctx) error {
 	req := c.Params("id")
 
