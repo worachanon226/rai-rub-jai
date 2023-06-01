@@ -3,7 +3,6 @@ import axios from "axios"
 let { endpoint, path } = API;
 
 let postExpense = async (id, t, d, v) => {
-
     const data = JSON.stringify({
         userid: id,
         title: t,
@@ -23,6 +22,23 @@ let postExpense = async (id, t, d, v) => {
     }
 }
 
+let deleteExpense = async (user, list) => {
+    const data = JSON.stringify({
+        userid: user,
+        listid: list,
+    });
+    const config = {
+        headers: { "Content-Type": "application/json" }
+    }
+    try {
+        let res = await axios.post(endpoint.concat(path.deleteExpense), data, config)
+        return res
+
+    } catch (error) {
+        return error;
+    }
+}
+
 let getExpenses = async (d) => {
     try {
         let res = await axios.get(endpoint.concat(path.getExpenses) + "/" + d);
@@ -34,4 +50,4 @@ let getExpenses = async (d) => {
     }
 }
 
-export { getExpenses, postExpense }
+export { getExpenses, postExpense, deleteExpense }

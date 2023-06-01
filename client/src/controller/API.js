@@ -4,6 +4,8 @@ let API = {
         login: "/user/login",
         register: "/user/register",
         checkDupUser: "/user/checkDupUser",
+        deleteExpense: "/user/deleteexpense",
+        deleteRevenue: "/user/deleterevenue",
         postExpense: "/user/postexpense",
         postRevenue: "/user/postrevenue",
         getExpenses: "/user/getexpense",

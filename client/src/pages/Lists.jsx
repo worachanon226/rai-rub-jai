@@ -146,11 +146,14 @@ const Lists = () => {
             {list.map((obj) => (
               <List
                 key={obj.id}
+                id={obj.id}
+                userid={user.id}
                 type={obj.type}
                 title={obj.title}
                 detail={obj.detail}
                 value={obj.value}
                 d={obj.date}
+                callback={getLists}
               />
             ))}
           </div>

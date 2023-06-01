@@ -23,6 +23,23 @@ let postRevenue = async (id, t, d, v) => {
     }
 }
 
+let deleteRevenue = async (user, list) => {
+    const data = JSON.stringify({
+        userid: user,
+        listid: list,
+    });
+    const config = {
+        headers: { "Content-Type": "application/json" }
+    }
+    try {
+        let res = await axios.post(endpoint.concat(path.deleteRevenue), data, config)
+        return res
+
+    } catch (error) {
+        return error;
+    }
+}
+
 let getRevenues = async (d) => {
     try {
         let res = await axios.get(endpoint.concat(path.getRevenues) + "/" + d);
@@ -34,4 +51,4 @@ let getRevenues = async (d) => {
     }
 }
 
-export { getRevenues, postRevenue }
+export { getRevenues, postRevenue, deleteRevenue }

@@ -1,7 +1,28 @@
 import { useState } from "react";
+import { deleteExpense } from "../../controller/ExpenseController";
+import { deleteRevenue } from "../../controller/RevenueController";
 
-const List = ({ type, title, detail, value, d }) => {
+const List = ({ id, userid, type, title, detail, value, d, callback }) => {
   const [showDetails, setShowDetails] = useState(false);
+
+  const deleteList = async () => {
+    if (type === "expense") {
+      try {
+        const res = await deleteExpense(userid, id);
+        console.log(res);
+      } catch (error) {
+        console.error("Error deleting expense:", error);
+      }
+    } else {
+      try {
+        const res = await deleteRevenue(userid, id);
+        console.log(res);
+      } catch (error) {
+        console.error("Error deleting revenue:", error);
+      }
+    }
+    callback(userid);
+  };
 
   const toggleDetails = () => {
     setShowDetails(!showDetails);
@@ -46,7 +67,10 @@ Date: ${date}
         >
           {showDetails ? "Hide" : "Show"}
         </button>
-        <button className="flex text-sm items-center justify-center bg-red-500 hover:bg-red-600 text-white rounded mx-2 py-1 px-1">
+        <button
+          className="flex text-sm items-center justify-center bg-red-500 hover:bg-red-600 text-white rounded mx-2 py-1 px-1"
+          onClick={deleteList}
+        >
           <svg
             className="h-4 w-4"
             fill="none"
