@@ -1,13 +1,17 @@
 const BottomNav = ({ expensesList, revenuesList }) => {
-  const totalExpenses = expensesList.reduce(
-    (total, expense) => total + expense.value,
-    0
-  );
+  let totalExpenses = 0;
+  let totalRevenues = 0;
+  if (expensesList !== null && revenuesList !== null) {
+    totalExpenses = expensesList.reduce(
+      (total, expense) => total + expense.value,
+      0
+    );
 
-  const totalRevenues = revenuesList.reduce(
-    (total, revenue) => total + revenue.value,
-    0
-  );
+    totalRevenues = revenuesList.reduce(
+      (total, revenue) => total + revenue.value,
+      0
+    );
+  }
 
   return (
     <>

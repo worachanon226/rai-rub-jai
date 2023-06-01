@@ -34,12 +34,13 @@ const Lists = () => {
       console.error("Error fetching revenue:", error);
     }
 
-    if (expenseLists !== undefined) {
+    if (expenseLists !== undefined || expenseLists === null) {
       lists = expenseLists;
       setExpensesList(expenseLists);
     }
-    if (revenueLists !== undefined) {
-      if (expenseLists === undefined) lists = revenueLists;
+    if (revenueLists !== undefined || revenueLists === null) {
+      if (expenseLists === undefined || expenseLists === null)
+        lists = revenueLists;
       else lists = expenseLists.concat(revenueLists);
       setRevenuesList(revenueLists);
     }
