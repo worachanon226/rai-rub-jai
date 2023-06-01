@@ -68,7 +68,7 @@ func DeleteExpense(userid string, listid string) error {
 		fmt.Println(exs.Expenses)
 	}
 
-	update := bson.D{{Key: "$set", Value: bson.D{{Key: "expenses", Value: exs}}}}
+	update := bson.D{{Key: "$set", Value: bson.D{{Key: "expenses", Value: exs.Expenses}}}}
 	_, err = coll.ExpenseCollection.UpdateOne(context.TODO(), filter, update)
 	if err != nil {
 		return err

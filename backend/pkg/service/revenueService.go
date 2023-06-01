@@ -68,7 +68,7 @@ func DeleteRevenue(userid string, listid string) error {
 		fmt.Println(rvs.Revenues)
 	}
 
-	update := bson.D{{Key: "$set", Value: bson.D{{Key: "revenues", Value: rvs}}}}
+	update := bson.D{{Key: "$set", Value: bson.D{{Key: "revenues", Value: rvs.Revenues}}}}
 	_, err = coll.RevenueCollection.UpdateOne(context.TODO(), filter, update)
 	if err != nil {
 		return err
