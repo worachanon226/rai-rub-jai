@@ -33,8 +33,8 @@ const List = ({ id, userid, type, title, detail, value, d, callback }) => {
     date.getMonth() + 1
   } / ${date.getFullYear()}`;
 
-  const text = `Title: ${title}
-Detail: ${detail}
+  const text = `Title: ${title == "" ? "-" : title}
+Detail: ${detail == "" ? "-" : detail}
 Value: ${value}
 Date: ${date}
   `;
