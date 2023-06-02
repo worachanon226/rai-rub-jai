@@ -102,6 +102,7 @@ const Actionmodal = ({ callback }) => {
                       </label>
                       <input
                         type="text"
+                        required
                         value={selectedOption}
                         onChange={() => {}}
                         placeholder="Select a Type"
@@ -171,6 +172,7 @@ const Actionmodal = ({ callback }) => {
                       </label>
                       <div className="mt-1 ml-1 w-full">
                         <input
+                          required
                           type="number"
                           id="value"
                           name="value"
