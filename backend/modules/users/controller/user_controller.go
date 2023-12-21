@@ -2,7 +2,6 @@ package controller
 
 import (
 	"encoding/json"
-	"fmt"
 	"rai-rub-jai/backend/modules/entities"
 	"rai-rub-jai/backend/pkg/service"
 	"strconv"
@@ -17,14 +16,14 @@ func NewUsersController(r fiber.Router) {
 }
 
 func checkDupUser(c *fiber.Ctx) error {
-	fmt.Println(string(c.Body()))
+	// fmt.Println(string(c.Body()))
 	ch := service.IsUser(string(c.Body()))
 	return c.SendString(strconv.FormatBool(ch))
 }
 
 func register(c *fiber.Ctx) error {
 	req := new(entities.UserRegisterReq)
-	fmt.Println(req)
+	// fmt.Println(req)
 
 	if err := c.BodyParser(req); err != nil {
 		return c.Status(fiber.ErrBadRequest.Code).JSON(fiber.Map{

@@ -2,7 +2,6 @@ package database
 
 import (
 	"context"
-	"fmt"
 	"rai-rub-jai/backend/config"
 	"rai-rub-jai/backend/pkg/utils"
 
@@ -27,6 +26,6 @@ func NewMongoDBConnection(cfg *config.Config) (*mongo.Client, error) {
 		panic(err)
 	}
 
-	fmt.Println("Successfully connected to MongoDB")
+	// fmt.Println("Successfully connected to MongoDB")
 	return db, nil
 }

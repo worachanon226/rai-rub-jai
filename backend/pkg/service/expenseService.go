@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"fmt"
 	"rai-rub-jai/backend/modules/entities"
 	"time"
 
@@ -65,7 +64,7 @@ func DeleteExpense(userid string, listid string) error {
 		if exs.Expenses[i].ID == listid {
 			exs.Expenses = append(exs.Expenses[:i], exs.Expenses[i+1:]...)
 		}
-		fmt.Println(exs.Expenses)
+		// fmt.Println(exs.Expenses)
 	}
 
 	update := bson.D{{Key: "$set", Value: bson.D{{Key: "expenses", Value: exs.Expenses}}}}
