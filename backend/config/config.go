@@ -9,6 +9,7 @@ type MongoDB struct {
 	Username string
 	Password string
 	Cluster  string
+	URI      string
 }
 
 type Fiber struct {

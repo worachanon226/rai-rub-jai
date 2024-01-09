@@ -10,9 +10,14 @@ import (
 )
 
 func NewUsersController(r fiber.Router) {
+	r.Get("/user", checkHealth)
 	r.Post("/user/checkDupUser", checkDupUser)
 	r.Post("/user/register", register)
 	r.Post("/user/login", login)
+}
+
+func checkHealth(c *fiber.Ctx) error {
+	return c.SendString("Hello from UsersController")
 }
 
 func checkDupUser(c *fiber.Ctx) error {

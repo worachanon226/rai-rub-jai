@@ -23,6 +23,7 @@ func main() {
 	cfg.MongoDB.Username = os.Getenv("DB_USER")
 	cfg.MongoDB.Password = os.Getenv("DB_PASS")
 	cfg.MongoDB.Cluster = os.Getenv("DB_CLUS")
+	cfg.MongoDB.URI = os.Getenv("MONGO_URI")
 
 	db, err := database.NewMongoDBConnection(cfg)
 	if err != nil {

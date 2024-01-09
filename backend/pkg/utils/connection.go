@@ -10,12 +10,11 @@ func ConnectionBuilder(stuff string, cfg *config.Config) (string, error) {
 	var url string
 
 	if stuff == "fiber" {
-		url = fmt.Sprintf("%s:%s", cfg.App.Host, cfg.App.Port)
+		url = fmt.Sprintf(":%s", cfg.App.Port)
 	} else if stuff == "mongodb" {
-		// url = fmt.Sprintf("mongodb+srv://%s:%s@%s.a1rfvkq.mongodb.net/?retryWrites=true&w=majority",
-		// 	cfg.MongoDB.Username, cfg.MongoDB.Password, cfg.MongoDB.Cluster)
-
-		url = "mongodb://localhost:27017/"
+		// url = fmt.Sprint("mongodb://root:pass%40Root@127.0.0.1:27017")
+		// url = "mongodb://localhost:27017/"
+		url = cfg.MongoDB.URI
 	} else {
 		err := fmt.Sprintf("error, connection url builder doesn't know the %s", stuff)
 		return "", errors.New(err)
