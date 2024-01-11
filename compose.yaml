@@ -10,19 +10,23 @@ services:
     volumes:
       - ./data/db:/data/db
     networks:
-      - app-network
+      app-network:
+        ipv4_address: 192.168.64.2
 
   frontend:
     container_name: frontend
     restart: always
-    image: rai-rub-jai-front:0.1
+    image: rai-rub-jai-front
+    depends_on:
+      - backend
     ports:
       - 80:80
     networks:
-      - app-network
+      app-network:
+        ipv4_address: 192.168.64.4
 
   backend:
-    image: rai-rub-jai:0.3
+    image: rai-rub-jai
     restart: always
     container_name: backend
     depends_on:
@@ -32,8 +36,13 @@ services:
     env_file:
       - ./backend/.env
     networks:
-      - app-network
+      app-network:
+        ipv4_address: 192.168.64.3
 
 networks:
   app-network:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.64.0/16
+          gateway: 192.168.64.1
